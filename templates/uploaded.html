@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<!--
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Stargazer</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+
+	</head>
+	<body class="landing is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" class="alt">
+					<h1><a href="index.html">Stargazer</a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li>
+								<a href="#" class="icon solid fa-angle-down">Layouts</a>
+								<ul>
+									<li><a href="result.html">Generic</a></li>
+									<li><a href="contact.html">Contact</a></li>
+									<li><a href="elements.html">Elements</a></li>
+									<li>
+										<a href="#">Submenu</a>
+										<ul>
+											<li><a href="#">Option One</a></li>
+											<li><a href="#">Option Two</a></li>
+											<li><a href="#">Option Three</a></li>
+											<li><a href="#">Option Four</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href="#" class="button">Sign Up</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+					<h2>Stargazer</h2>
+					<p>Set your data free.</p>
+					<ul class="actions special">
+						<li><a href="#" class="button primary">Sign Up</a></li>
+						<li><a href="#" class="button">Learn More</a></li>
+					</ul>
+				</section>
+
+			<!-- Main -->
+				<section id="main" class="container">
+
+					<section class="box special">
+						<header class="major">
+							<h2>Create your own synthetic dataset
+							<br />
+							with multiple methods</h2>
+							<p>You can upload a file and choose one of the methods below. <br /> Your synthetic dataset will be ready in a few minutes.</p>
+						</header>
+					</section>
+ <div id = "tab_layout">
+        <span>
+            <span id="uploaded_info">File name: {{ original_name }}</span>
+            <span id="uploaded_icon" class="box">Data Uploaded</span>
+        </span>
+
+
+<div class="tabs">
+
+		  <input type="radio" id="tab1" name="tab-control" checked>
+		  <input type="radio" id="tab2" name="tab-control">
+		  <input type="radio" id="tab3" name="tab-control">
+		  <input type="radio" id="tab4" name="tab-control">
+		  <ul>
+		    <li title="Aggregation"><label for="tab1" role="button"><span>Aggregation</span></label></li>
+		    <li title="Statistics Approach"><label for="tab2" role="button"><span>Statistics Approach</span></label></li>
+		    <li title="Neural Network"><label for="tab3" role="button"><span>Neural Network</span></label></li>
+            <li title="Pseudonymization"><label for="tab4" role="button"><span>Pseudonymization</span></label></li>
+		  </ul>
+		  <div class="slider"><div class="indicator"></div></div>
+		  <div class="content">
+
+		    <section id="aggregation
+">
+
+<form method="post"  enctype="multipart/form-data" action="{{ url_for('get_aggregation_result') }}">
+                <div class="column_selection">
+{#                    {{ form.pseu_methods }}#}
+                    <h1>Choose the field you want to group by:</h1>
+                <label>
+                    <select name="group_by_column">
+                        {% for column in aggregation_form.columns %}
+                        <option value={{column}}>
+                            {{column}}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </label>
+                </div>
+                <div class="column_selection">
+                    <h1>Choose the field you want to calculate statistics:</h1>
+                    <label>
+                        <select name="statistics_column">
+                            {% for column in aggregation_form.columns %}
+                            <option value={{column}}>
+                                {{column}}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                </div>
+                <div class="multiple_methods_selection">
+                    <h1>Choose the statistics you want to calculate:</h1>
+                    <p>For the numerical:</p>
+                    <ul>
+                        {% for numerical_method in aggregation_form.numerical_methods %}
+                        <li>
+                            <label><input type="checkbox" name="numerical_method" value={{numerical_method}}><span>{{numerical_method}}</span></label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <p>For others:</p>
+                    <ul>
+                        {% for other_method in aggregation_form.other_methods %}
+                        <li>
+                            <label><input type="checkbox" name="other_method" value={{other_method}}><span>{{other_method}}</span></label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    {{ aggregation_form.submit }}
+                </div>
+
+            </form>
+
+
+		       </section>
+		        <section>
+		          <h2>Delivery Contents</h2>
+		          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. </section>
+		        <section>
+		          <h2>Shipping</h2>
+		          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. </section>
+            <section id="pseu">
+            <form method="post"  enctype="multipart/form-data" action="{{ url_for('get_pseu_result') }}">
+                <div class="method_selection">
+{#                    {{ form.pseu_methods }}#}
+                    {% for pseu_method in pseu_form.pseu_methods %}
+                    <label><input type="radio" name="pseu_method" value={{pseu_method}}><span>{{pseu_method}}</span></label>
+                    {% endfor %}
+                </div>
+                <div class="column_selection">
+                    <h1>Choose the fields you want to transform:</h1>
+                    <ul>
+                        {% for column in pseu_form.columns %}
+                        <li>
+                            <label><input type="checkbox" name="pseu_column" value={{column}}><span>{{column}}</span></label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+{#                    <button class="button run" id = "pseu_run">Run!</button>#}
+                    {{ pseu_form.submit }}
+                </div>
+
+            </form>
+            </section>
+	  </div>
+		</div>
+     </div>
+					<section class="box special features">
+						<div class="features-row">
+							<section>
+								<span class="icon solid major fa-bolt accent2"></span>
+								<h3>Aggregation</h3>
+								<p>Description</p>
+                                <ul class="actions special">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
+							<section>
+								<span class="icon solid major fa-chart-area accent3"></span>
+								<h3>Statistic Approach</h3>
+								<p>Description</p>
+                                <ul class="actions special">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
+						</div>
+						<div class="features-row">
+							<section>
+								<span class="icon solid major fa-cloud accent4"></span>
+								<h3>Neural Network</h3>
+								<p>Description</p>
+                                                                <ul class="actions special">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
+							<section>
+								<span class="icon solid major fa-lock accent5"></span>
+								<h3>Pseudonymization</h3>
+								<p>Description</p>
+                                                                <ul class="actions special">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
+						</div>
+					</section>
+
+
+
+				</section>
+
+			<!-- CTA -->
+				<section id="cta">
+
+					<h2>Sign up for beta access</h2>
+					<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
+
+					<form>
+						<div class="row gtr-50 gtr-uniform">
+							<div class="col-8 col-12-mobilep">
+								<input type="email" name="email" id="email" placeholder="Email Address" />
+							</div>
+							<div class="col-4 col-12-mobilep">
+								<input type="submit" value="Sign Up" class="fit" />
+							</div>
+						</div>
+					</form>
+
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+{#						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>#}
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.dropotron.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script type="text/javascript">
+                    {#$(function(){#}
+                    {#    $('#pseu_run').click(function(){#}
+                    {#        var selected_method = "";#}
+                    {#        var pseu_methods = document.getElementsByName("pseu_method");#}
+                    {#        for (i=0; i<pseu_methods.length;i++){#}
+                    {#            if(pseu_methods[i].checked) {#}
+                    {#                selected_method = pseu_methods[i].value;#}
+                    {#            }#}
+                    {#        }#}
+                    {#        var selected_columns = [];#}
+                    {#        var pseu_columns = document.getElementsByName("pseu_column");#}
+                    {#        for (i=0;i<pseu_columns.length;i++){#}
+                    {#            if(pseu_columns[i].checked){#}
+                    {#                selected_columns.push(pseu_columns[i].value);#}
+                    {#            }#}
+                    {#        }#}
+                    {#        if (selected_method.length > 0 && selected_columns.length>0){#}
+                    {#        window.parent.parent.location.href="{{url_for('get_result')}}";#}
+                    {#        } else {alert("No method or chosen column.");}#}
+                    {#    })#}
+                    {##}
+                    {# })#}
+            </script>
+	</body>
+</html>
