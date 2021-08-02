@@ -3,6 +3,7 @@ from flask import Flask, render_template, url_for, session, flash, \
 
 from modules.pseu import pseudonymization
 from modules.aggregation import calculate_statistics
+from modules.GANs import gans
 
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
@@ -55,6 +56,15 @@ class AggregationForm(FlaskForm):
     submit = SubmitField('Run!')
 
 
+class NeuralNetworkForm(FlaskForm):
+    def __init__(self, columns):
+        super(FlaskForm, self).__init__()
+        self.columns = columns
+
+    nn_methods = ['GANs', 'VAE']
+    submit = SubmitField('Run!')
+
+
 class PseuForm(FlaskForm):
     def __init__(self, columns):
         super(FlaskForm, self).__init__()
@@ -92,9 +102,10 @@ def uploaded_status(file_name):
     columns = list(pd.read_csv(data_path))
 
     pseu_form = PseuForm(columns)
+    nn_form = NeuralNetworkForm(columns)
     aggregation_form = AggregationForm(columns)
 
-    return render_template('uploaded.html', original_name=original_name, pseu_form=pseu_form,
+    return render_template('uploaded.html', original_name=original_name, pseu_form=pseu_form, nn_form=nn_form,
                            aggregation_form=aggregation_form)
 
 
@@ -129,6 +140,33 @@ def get_aggregation_result():
     return render_template('result.html', function="Aggregation", selected_method=selected_method,
                            display=display,
                            download_file_name=session['download_file_name'] + ".csv")
+
+@app.route('/get_nn_result', methods=["POST"])
+def get_nn_result():
+    file_name = session['filename'].split('.')[0]
+    data_path = 'uploads/' + session['filename']
+
+    selected_method = request.values.getlist("pseu_method")[0]
+    selected_columns = request.values.getlist("pseu_column")
+    result = pseudonymization(selected_method, data_path, selected_columns)
+    random_name = random_filename(file_name)
+    result.to_csv(os.path.join(app.config['DOWNLOAD_PATH'], random_name) + ".csv", index=0)
+    session['download_file_name'] = [random_name][0]
+
+    display = """<table id="pseu_result"><tr>"""
+    for column in selected_columns:
+        display = display + "<th>" + str(column) + "</th>"
+    display = display + "</tr>"
+    for i in range(min(result.shape[0], 20)):
+        display = display + "<tr>"
+        for column in selected_columns:
+            display = display + "<td>" + str(result[column][i]) + "</td>"
+        display = display + "</tr>"
+    display = display + "</table>"
+
+    # return render_template('result.html', function="Pseudonymization", selected_method=selected_method,
+    #                        display=display,
+    #                        download_file_name=session['download_file_name'] + ".csv")
 
 
 @app.route('/get_pseu_result', methods=["POST"])

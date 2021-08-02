@@ -86,8 +86,7 @@
 		  <div class="slider"><div class="indicator"></div></div>
 		  <div class="content">
 
-		    <section id="aggregation
-">
+		    <section id="aggregation">
 
 <form method="post"  enctype="multipart/form-data" action="{{ url_for('get_aggregation_result') }}">
                 <div class="column_selection">
@@ -143,13 +142,38 @@
 
 		       </section>
 		        <section>
-		          <h2>Delivery Contents</h2>
-		          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. </section>
-		        <section>
-		          <h2>Shipping</h2>
-		          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. </section>
+
+                </section>
+		        <section id="">
+		          <form method="post"  enctype="multipart/form-data" action="{{ url_for('get_nn_result') }}"
+{#                        onsubmit="return validate_form(this, 'pseu_column');"#}
+                  >
+
+                <div class="method_selection">
+                    {% for nn_method in nn_form.nn_methods %}
+                    <label><input type="radio" name="nn_method" value={{nn_method}}><span>{{nn_method}}</span></label>
+                    {% endfor %}
+                </div>
+                <div class="column_selection">
+                    <h1>Choose the fields that are categorical variables:</h1>
+                    <ul>
+                        {% for column in nn_form.columns %}
+                        <li>
+                            <label><input type="checkbox" name="nn_column" value={{column}}><span>{{column}}</span></label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+{#                    <button class="button run" id = "pseu_run">Run!</button>#}
+                    {{ nn_form.submit }}
+                </div>
+
+            </form>
+                </section>
             <section id="pseu">
-            <form method="post"  enctype="multipart/form-data" action="{{ url_for('get_pseu_result') }}">
+            <form method="post"  enctype="multipart/form-data" action="{{ url_for('get_pseu_result') }}" onsubmit="return validate_form(this, 'pseu_column');">
+
                 <div class="method_selection">
 {#                    {{ form.pseu_methods }}#}
                     {% for pseu_method in pseu_form.pseu_methods %}
@@ -264,29 +288,42 @@
 			<script src="../assets/js/util.js"></script>
 			<script src="../assets/js/main.js"></script>
             <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-            <script type="text/javascript">
-                    {#$(function(){#}
-                    {#    $('#pseu_run').click(function(){#}
-                    {#        var selected_method = "";#}
-                    {#        var pseu_methods = document.getElementsByName("pseu_method");#}
-                    {#        for (i=0; i<pseu_methods.length;i++){#}
-                    {#            if(pseu_methods[i].checked) {#}
-                    {#                selected_method = pseu_methods[i].value;#}
-                    {#            }#}
-                    {#        }#}
-                    {#        var selected_columns = [];#}
-                    {#        var pseu_columns = document.getElementsByName("pseu_column");#}
-                    {#        for (i=0;i<pseu_columns.length;i++){#}
-                    {#            if(pseu_columns[i].checked){#}
-                    {#                selected_columns.push(pseu_columns[i].value);#}
-                    {#            }#}
-                    {#        }#}
-                    {#        if (selected_method.length > 0 && selected_columns.length>0){#}
-                    {#        window.parent.parent.location.href="{{url_for('get_result')}}";#}
-                    {#        } else {alert("No method or chosen column.");}#}
-                    {#    })#}
-                    {##}
-                    {# })#}
-            </script>
+<script type="text/javascript">
+
+function validate_required(field,alerttxt)
+{
+    var checkOne = false;                    //判断是否被选择条件
+    {#var chboxVal = [];                       //存入被选中项的值#}
+    var checkBox = $('input[name = ' + field + ']'); //获得得到所的复选框
+
+    for (var i = 0; i < checkBox.length; i++) {
+
+                //如果有1个被选中时（jquery1.6以上还可以用if(checkBox[i].prop('checked')) 去判断checkbox是否被选中）
+        if (checkBox[i].checked) {
+            checkOne = true;
+            {#chboxVal.push(checkBox[i].value)//将被选择的值追加到#}
+        }
+    }
+    alert(checkOne);
+
+
+
+  if (!checkOne)
+    {alert(alerttxt);return false}
+    else {return true}
+
+}
+
+function validate_form(thisform, field)
+{
+with (thisform)
+  {
+  if (validate_required(field,"Must at least select one column!")==false)
+    {return false}
+  else {return true}
+  }
+
+}
+</script>
 	</body>
 </html>

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="be89adb3-e4ca-4007-96db-f85fd95d6470" name="Default Changelist" comment="" />
+    <list default="true" id="be89adb3-e4ca-4007-96db-f85fd95d6470" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/modules/GANs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/metrics.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/visual_comparision.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/viz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/uploaded.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/uploaded.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,28 +34,37 @@
       <list>
         <option value="HTML File" />
         <option value="Python Script" />
+        <option value="package.json" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="PATH_TO_GIT" value="D:\programming_environment\Git\bin\git.exe" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1vo4fJ1BeV365aOgY5xMtAEp3fZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\programs\Stargazer\templates" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\programs\Stargazer\modules" />
       <recent name="D:\programs\Stargazer\" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\programs\Stargazer" />
+      <recent name="D:\programs\Stargazer\templates" />
     </key>
   </component>
   <component name="RunManager" selected="Flask server.Flask (app.py)">
@@ -95,6 +112,44 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Stargazer" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/modules" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/modules/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Stargazer" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="D:\programs\Stargazer\modules\test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Flask (app.py)" type="Python.FlaskServer" nameIsGenerated="true">
       <option name="flaskDebug" value="true" />
       <module name="Stargazer" />
@@ -131,9 +186,13 @@
       <item itemvalue="Flask server.Flask (app.py)" />
       <item itemvalue="Flask server.Flask (hello.py)" />
       <item itemvalue="Python.app" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.test (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test (1)" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.app" />
         <item itemvalue="Flask server.Flask (hello.py)" />
       </list>
@@ -154,7 +213,12 @@
       <workItem from="1627259469489" duration="37206000" />
       <workItem from="1627403304479" duration="22782000" />
       <workItem from="1627495539841" duration="3796000" />
-      <workItem from="1627538467664" duration="14051000" />
+      <workItem from="1627538467664" duration="15477000" />
+      <workItem from="1627568273333" duration="1192000" />
+      <workItem from="1627700458120" duration="4731000" />
+      <workItem from="1627733648167" duration="4295000" />
+      <workItem from="1627794855637" duration="11055000" />
+      <workItem from="1627884920215" duration="21927000" />
     </task>
     <servers />
   </component>
@@ -170,37 +234,44 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="728" y="391" key="#com.jetbrains.python.refactoring.move.PyMakeFunctionTopLevelDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1627286570115" />
-    <state x="-1280" y="194" key="FileChooserDialogImpl" timestamp="1627221643406">
-      <screen x="-1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="-1280" y="194" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1627221643406" />
-    <state width="1855" height="25" key="GridCell.Tab.0.bottom" timestamp="1627550480997">
+    <state x="640" y="194" key="FileChooserDialogImpl" timestamp="1627797628464">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1855" height="25" key="GridCell.Tab.0.bottom/-1920.0.1280.693/0.0.1920.1040/-3840.137.1920.1040@0.0.1920.1040" timestamp="1627550480997" />
+    <state x="640" y="194" key="FileChooserDialogImpl/-1920.0.1280.693/0.0.1920.1040/-3840.137.1920.1040@0.0.1920.1040" timestamp="1627797628464" />
+    <state x="-1280" y="194" key="FileChooserDialogImpl/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1627221643406" />
+    <state width="1855" height="97" key="GridCell.Tab.0.bottom" timestamp="1627707625365">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1855" height="97" key="GridCell.Tab.0.bottom/-1920.0.1280.693/-3840.137.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1627707625365" />
+    <state width="1855" height="36" key="GridCell.Tab.0.bottom/-1920.0.1280.693/0.0.1920.1040/-3840.137.1920.1040@0.0.1920.1040" timestamp="1627571450417" />
     <state width="1855" height="252" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1627221394847" />
     <state width="1855" height="252" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1627451977747" />
-    <state width="1855" height="25" key="GridCell.Tab.0.center" timestamp="1627550480996">
+    <state width="1855" height="97" key="GridCell.Tab.0.center" timestamp="1627707625365">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1855" height="25" key="GridCell.Tab.0.center/-1920.0.1280.693/0.0.1920.1040/-3840.137.1920.1040@0.0.1920.1040" timestamp="1627550480996" />
+    <state width="1855" height="97" key="GridCell.Tab.0.center/-1920.0.1280.693/-3840.137.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1627707625365" />
+    <state width="1855" height="36" key="GridCell.Tab.0.center/-1920.0.1280.693/0.0.1920.1040/-3840.137.1920.1040@0.0.1920.1040" timestamp="1627571450417" />
     <state width="1855" height="252" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1627221394847" />
     <state width="1855" height="252" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1627451977747" />
-    <state width="1855" height="25" key="GridCell.Tab.0.left" timestamp="1627550480996">
+    <state width="1855" height="97" key="GridCell.Tab.0.left" timestamp="1627707625365">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1855" height="25" key="GridCell.Tab.0.left/-1920.0.1280.693/0.0.1920.1040/-3840.137.1920.1040@0.0.1920.1040" timestamp="1627550480996" />
+    <state width="1855" height="97" key="GridCell.Tab.0.left/-1920.0.1280.693/-3840.137.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1627707625365" />
+    <state width="1855" height="36" key="GridCell.Tab.0.left/-1920.0.1280.693/0.0.1920.1040/-3840.137.1920.1040@0.0.1920.1040" timestamp="1627571450417" />
     <state width="1855" height="252" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1627221394847" />
     <state width="1855" height="252" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1627451977747" />
-    <state width="1855" height="25" key="GridCell.Tab.0.right" timestamp="1627550480996">
+    <state width="1855" height="97" key="GridCell.Tab.0.right" timestamp="1627707625365">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1855" height="25" key="GridCell.Tab.0.right/-1920.0.1280.693/0.0.1920.1040/-3840.137.1920.1040@0.0.1920.1040" timestamp="1627550480996" />
+    <state width="1855" height="97" key="GridCell.Tab.0.right/-1920.0.1280.693/-3840.137.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1627707625365" />
+    <state width="1855" height="36" key="GridCell.Tab.0.right/-1920.0.1280.693/0.0.1920.1040/-3840.137.1920.1040@0.0.1920.1040" timestamp="1627571450417" />
     <state width="1855" height="252" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1627221394847" />
     <state width="1855" height="252" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1627451977747" />
-    <state x="-1706" y="0" key="SettingsEditor" timestamp="1627216720463">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state x="214" y="0" key="SettingsEditor" timestamp="1627571392444">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="-1920" y="0" key="SettingsEditor/-1920.0.1280.693/0.0.1920.1040/-3840.137.1920.1040@-1920.0.1280.693" timestamp="1627568283081" />
+    <state x="214" y="0" key="SettingsEditor/-1920.0.1280.693/0.0.1920.1040/-3840.137.1920.1040@0.0.1920.1040" timestamp="1627571392444" />
     <state x="-1706" y="0" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@-1920.0.1920.1040" timestamp="1627216720463" />
     <state x="-3485" y="137" width="1236" height="715" maximized="true" key="dock-window-1" timestamp="1627543786683">
       <screen x="-3840" y="137" width="1920" height="1040" />
@@ -220,7 +291,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Stargazer$Flask__hello_py_.coverage" NAME="Flask (hello.py) Coverage Results" MODIFIED="1627216590563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Stargazer$Flask__flask_run_.coverage" NAME="Flask (flask:run) Coverage Results" MODIFIED="1627215562671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Stargazer$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1627543437738" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Stargazer$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1627916474031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Stargazer$app.coverage" NAME="app Coverage Results" MODIFIED="1627221347177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/templates" />
     <SUITE FILE_PATH="coverage/Stargazer$Flask.coverage" NAME="Run hello Coverage Results" MODIFIED="1627215955401" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Stargazer$Flask__templates_app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1627296466792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
