@@ -93,7 +93,7 @@ class TableEvaluator:
         """
         plot_mean_std(self.real, self.fake, self.name, self.save_path)
 
-    def plot_cumsums(self, nr_cols=4):
+    def plot_cumsums(self, nr_cols=2):
         """
         Plot the cumulative sums for all columns in the real and fake dataset. Height of each row scales with the length of the labels. Each plot contains the
         values of a real columns and the corresponding fake column.
@@ -122,7 +122,7 @@ class TableEvaluator:
         plt.savefig(self.save_path + "/" + self.name + "/cumsums.png")
         plt.show()
 
-    def plot_distributions(self, nr_cols=3):
+    def plot_distributions(self, nr_cols=2):
         """
         Plot the distribution plots for all columns in the real and fake dataset. Height of each row of plots scales with the length of the labels. Each plot
         contains the values of a real columns and the corresponding fake column.

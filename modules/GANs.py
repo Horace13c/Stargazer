@@ -75,6 +75,7 @@ class GAN():
         fake = np.zeros((self.batch_size, 1))
 
         for epoch in range(epochs):
+            #-- print(epochs)
             # ---------------------
             #  Train Discriminator
             # ---------------------
@@ -97,7 +98,11 @@ class GAN():
             g_loss = self.combined.train_on_batch(noise, valid)
 
             # Plot the progress
-            print("%d [D loss: %f, acc.: %.2f%%] [G loss: %f]" % (epoch, d_loss[0], 100 * d_loss[1], g_loss))
+            #-- print(str(epoch))
+            #-- print(str(d_loss[0]))
+            #-- print(str(d_loss[1]))
+            #-- print(str(g_loss))
+            #-- print("%d [D loss: %f, acc.: %.2f%%] [G loss: %f]" % (epoch, d_loss[0], 100 * d_loss[1], g_loss))
 
             # If at save interval => save generated events
             if epoch % sample_interval == 0:
@@ -110,7 +115,7 @@ class GAN():
                 # Here is generating the data
                 z = tf.random.normal((432, self.noise_dim))
                 gen_data = self.generator(z)
-                print('generated_data')
+                #-- print('generated_data')
 
     def save(self, path, name):
         assert os.path.isdir(path) == True, \
@@ -155,9 +160,22 @@ class Discriminator():
         return Model(inputs=input, outputs=x)
 
 
-def gans(file_path, name, file_save_path, model_save_path, image_save_path, batch_size=100, epochs=2000, noise_dim=32):
+def gans(file_path, name, file_save_path, model_save_path, image_save_path, cat_columns=[], batch_size=100, epochs=2000,
+         noise_dim=32, output_size=350):
     # config
-    df = pd.read_csv(file_path)
+    df_original = pd.read_csv(file_path)
+    df_original.dropna()
+    df = df_original.copy()
+
+    cat_dict = {}
+    original_dict = {}
+    for cat_column in cat_columns:
+        if not np.issubdtype(df[cat_column].dtype, np.number):
+            original_dict[cat_column] = list(df[cat_column].drop_duplicates())
+            df[cat_column] = df[cat_column].apply(lambda x: original_dict[cat_column].index(x))
+        cat_values = list(df[cat_column].drop_duplicates())
+        cat_dict[cat_column] = cat_values
+    print(cat_dict)
 
     pw = PowerTransformer(method='yeo-johnson', standardize=True, copy=True)
     pwt = pw.fit_transform(df[df.columns])
@@ -169,7 +187,7 @@ def gans(file_path, name, file_save_path, model_save_path, image_save_path, batc
     noise_dim = noise_dim
     dim = 128
     batch_size = batch_size
-
+    output_size = output_size  # number of fraud cases
     log_step = 100
     epochs = epochs + 1
     learning_rate = 5e-4
@@ -188,12 +206,9 @@ def gans(file_path, name, file_save_path, model_save_path, image_save_path, batc
 
     models = {'GAN': ['GAN', False, synthesizer.generator]}
 
-    seed = 10
-    test_size = 350  # number of fraud cases
-    noise_dim = 32
     base_dir = model_save_path + '/' + name + "/"
 
-    z = np.random.normal(size=(test_size, noise_dim))
+    z = np.random.normal(size=(output_size, noise_dim))
     [model_name, with_class, generator_model] = models['GAN']
     generator_model.load_weights(base_dir + '_generator_model_weights_step_' + str(epochs-1) + '.h5')
 
@@ -201,10 +216,20 @@ def gans(file_path, name, file_save_path, model_save_path, image_save_path, batc
     g_z = pw.inverse_transform(g_z)
 
     gen_samples = pd.DataFrame(g_z, columns=data_cols)
-    gen_samples.to_csv(file_save_path + name + ".csv")
+
+    for cat_column in cat_columns:
+        gen_samples[cat_column] = gen_samples[cat_column].apply(
+            lambda x: min(cat_dict[cat_column]) if x < min(cat_dict[cat_column]) else
+            (max(cat_dict[cat_column]) if x > max(cat_dict[cat_column]) else
+             round(x)))
+        if not np.issubdtype(df[cat_column].dtype, np.number):
+            gen_samples[cat_column] = gen_samples[cat_column].apply(
+                lambda x: original_dict[cat_column][x])
+
+    gen_samples.to_csv(file_save_path + "/" + name + ".csv", index=False)
 
     os.makedirs(image_save_path + "/" + name, exist_ok=True)
 
-    table_evaluator = TableEvaluator(df, gen_samples, save_path=image_save_path, name="test")
+    table_evaluator = TableEvaluator(df_original, gen_samples, save_path=image_save_path, name=name, cat_cols=cat_columns)
 
     table_evaluator.visual_evaluation()

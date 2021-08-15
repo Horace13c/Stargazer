@@ -13,6 +13,7 @@
 
 	</head>
 	<body class="landing is-preload">
+    <div id="disable_elements">You data is in processing, please wait. That can take seconds or minutes.</div>
 		<div id="page-wrapper">
 
 			<!-- Header -->
@@ -61,7 +62,7 @@
 							<h2>Create your own synthetic dataset
 							<br />
 							with multiple methods</h2>
-							<p>You can upload a file and choose one of the methods below. <br /> Your synthetic dataset will be ready in a few minutes.</p>
+							<p>Now choose one of the methods below. <br /> Your synthetic dataset will be ready in a few minutes.</p>
 						</header>
 					</section>
  <div id = "tab_layout">
@@ -144,10 +145,10 @@
 		        <section>
 
                 </section>
-		        <section id="">
+		        <section id="nn">
 		          <form method="post"  enctype="multipart/form-data" action="{{ url_for('get_nn_result') }}"
-{#                        onsubmit="return validate_form(this, 'pseu_column');"#}
-                  >
+                        onsubmit="return validate_nn_form(this,'nn_method');">
+
 
                 <div class="method_selection">
                     {% for nn_method in nn_form.nn_methods %}
@@ -164,15 +165,35 @@
                         {% endfor %}
                     </ul>
                 </div>
+               <div class="parameter_selection" id="GANs">
+                   <h1>Choose parameters:</h1>
+                  <label><span>batch_size: </span>
+                      <input type="range" id="gans_batch_size_range" name="gans_batch_size" min="1" max="100" onchange="gans_batch_size_change()"/>
+                      <span id="gans_batch_size_value"></span>
+                  </label>
+                 <label><span>epochs: </span>
+                      <input type="range" id="gans_epochs_range" name="gans_epochs" min="100" max="10000" step="100" onchange="gans_epochs_change()"/>
+                      <span id="gans_epochs_value"></span>
+                  </label>
+                  <label><span>noise_dim: </span>
+                      <input type="range" id="gans_noise_dim_range" name="gans_noise_dim" min="1" max="50" onchange="gans_noise_dim_change()"/>
+                      <span id="gans_noise_dim_value"></span>
+                  </label>
+
+                  <h1>Enter the size of output data:</h1>
+                  <label><span>output_size: </span>
+                      <input type="range" id="gans_output_size_range" name="gans_output_size" min="5" max="10000" step="5" onchange="gans_output_size_change()"/>
+                      <span id="gans_output_size_value"></span>
+                  </label>
+               </div>
                 <div>
-{#                    <button class="button run" id = "pseu_run">Run!</button>#}
                     {{ nn_form.submit }}
                 </div>
 
             </form>
                 </section>
             <section id="pseu">
-            <form method="post"  enctype="multipart/form-data" action="{{ url_for('get_pseu_result') }}" onsubmit="return validate_form(this, 'pseu_column');">
+            <form method="post"  enctype="multipart/form-data" action="{{ url_for('get_pseu_result') }}" onsubmit="return validate_pseu_form(this, 'pseu_column', 'pseu_method');">
 
                 <div class="method_selection">
 {#                    {{ form.pseu_methods }}#}
@@ -290,23 +311,35 @@
             <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
-function validate_required(field,alerttxt)
+
+function gans_batch_size_change() {
+    document.getElementById('gans_batch_size_value').innerHTML = document.getElementById('gans_batch_size_range').value;
+}
+
+function gans_epochs_change() {
+    document.getElementById('gans_epochs_value').innerHTML = document.getElementById('gans_epochs_range').value;
+}
+
+function gans_noise_dim_change() {
+    document.getElementById('gans_noise_dim_value').innerHTML = document.getElementById('gans_noise_dim_range').value;
+}
+
+function gans_output_size_change() {
+    document.getElementById('gans_output_size_value').innerHTML = document.getElementById('gans_output_size_range').value;
+}
+
+function one_checked_required(field,alerttxt)
 {
     var checkOne = false;                    //判断是否被选择条件
     {#var chboxVal = [];                       //存入被选中项的值#}
     var checkBox = $('input[name = ' + field + ']'); //获得得到所的复选框
 
     for (var i = 0; i < checkBox.length; i++) {
-
-                //如果有1个被选中时（jquery1.6以上还可以用if(checkBox[i].prop('checked')) 去判断checkbox是否被选中）
         if (checkBox[i].checked) {
             checkOne = true;
-            {#chboxVal.push(checkBox[i].value)//将被选择的值追加到#}
+            break;
         }
     }
-    alert(checkOne);
-
-
 
   if (!checkOne)
     {alert(alerttxt);return false}
@@ -314,16 +347,40 @@ function validate_required(field,alerttxt)
 
 }
 
-function validate_form(thisform, field)
+
+function validate_pseu_form(thisform, column_element, method_element)
 {
 with (thisform)
   {
-  if (validate_required(field,"Must at least select one column!")==false)
+  if (one_checked_required(column_element,"Must at least select one column!")===false)
     {return false}
-  else {return true}
+  if (one_checked_required(method_element,"Please choose method!")===false)
+    {return false}
+  showLoading();
+  return true;
   }
-
 }
+
+
+function validate_nn_form(thisform, method_element)
+{
+with (thisform)
+  {
+  if (one_checked_required(method_element,"Please choose method!")===false)
+    {return false}
+  showLoading();
+  return true;
+  }
+}
+
+function showLoading() {
+    $("#disable_elements").show();
+    $("#disable_elements").css('top',document.documentElement.scrollTop);
+    $("#disable_elements").css('line-height',$(window).height().toString() + "px");
+    $("body").css('overflow-y', "hidden");
+}
+
+
 </script>
 	</body>
 </html>

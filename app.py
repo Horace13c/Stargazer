@@ -15,29 +15,12 @@ from jinja2.utils import generate_lorem_ipsum
 import uuid
 import os
 import pandas as pd
+import datetime
 
 app = Flask(__name__, template_folder='templates', static_folder="", static_url_path="")
-
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 app.config["SECRET_KEY"] = uuid.uuid4().hex
-
-user = {
-    'username': ' Grev Li',
-    'bio': 'A boy who loves movies and music.'
-}
-
-movies = [
-    {'name': ' My Neiqhbor Totoro', 'year': '1988'},
-    {'name': ' Three Colours trilogy', 'year': '1993'},
-    {'name': ' Forrest Gump', 'year': '1994'},
-    {'name': ' perfect Blue', 'year': '1997'},
-    {'name': ' The Matrix', 'year': '1999'},
-    {'name': ' Memento', 'year': '2000'},
-    {'name': ' The Bucket list', 'year': '2007'},
-    {'name': ' Black Swan', 'year': '2010'},
-    {'name': ' Gone Girl', 'year': '2014'},
-    {'name': ' Coco', 'year': '2017'},
-]
+app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(days=7)
 
 
 class UploadForm(FlaskForm):
@@ -61,7 +44,7 @@ class NeuralNetworkForm(FlaskForm):
         super(FlaskForm, self).__init__()
         self.columns = columns
 
-    nn_methods = ['GANs', 'VAE']
+    nn_methods = ['GANs']
     submit = SubmitField('Run!')
 
 
@@ -80,6 +63,7 @@ app.config["DOWNLOAD_PATH"] = os.path.join(app.root_path, 'downloads')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    session.permanent = True
     # return render_template('watchlist.html', user=user, movies=movies)
     form = UploadForm()
 
@@ -120,9 +104,8 @@ def get_aggregation_result():
     selected_method.extend(request.values.getlist("other_method"))
     result = calculate_statistics(data_path, group_by_column, selected_method, statistics_column)
     selected_method = list(result)[1:]
-    random_name = random_filename(file_name)
-    result.to_csv(os.path.join(app.config['DOWNLOAD_PATH'], random_name) + ".csv", index=0)
-    session['download_file_name'] = [random_name][0]
+    result.to_csv(os.path.join(app.config['DOWNLOAD_PATH'], file_name) + ".csv", index=0)
+    session['download_file_name'] = file_name
 
     display = """<table id="aggregation_result"><tr>"""
     display = display + "<th>" + str(group_by_column) + "</th>"
@@ -141,32 +124,38 @@ def get_aggregation_result():
                            display=display,
                            download_file_name=session['download_file_name'] + ".csv")
 
+
 @app.route('/get_nn_result', methods=["POST"])
 def get_nn_result():
+
     file_name = session['filename'].split('.')[0]
     data_path = 'uploads/' + session['filename']
+    session['download_file_name'] = file_name
 
-    selected_method = request.values.getlist("pseu_method")[0]
-    selected_columns = request.values.getlist("pseu_column")
-    result = pseudonymization(selected_method, data_path, selected_columns)
-    random_name = random_filename(file_name)
-    result.to_csv(os.path.join(app.config['DOWNLOAD_PATH'], random_name) + ".csv", index=0)
-    session['download_file_name'] = [random_name][0]
+    selected_method = request.values.getlist("nn_method")[0]
+    cat_columns = request.values.getlist("nn_column")
 
-    display = """<table id="pseu_result"><tr>"""
-    for column in selected_columns:
-        display = display + "<th>" + str(column) + "</th>"
-    display = display + "</tr>"
-    for i in range(min(result.shape[0], 20)):
-        display = display + "<tr>"
-        for column in selected_columns:
-            display = display + "<td>" + str(result[column][i]) + "</td>"
-        display = display + "</tr>"
-    display = display + "</table>"
+    batch_size = int(request.values.get("gans_batch_size"))
+    # --print(batch_size)
+    epochs = int(request.values.get("gans_epochs"))
+    # --print(epochs)
+    noise_dim = int(request.values.get("gans_noise_dim"))
+    output_size = int(request.values.get("gans_output_size"))
 
-    # return render_template('result.html', function="Pseudonymization", selected_method=selected_method,
-    #                        display=display,
-    #                        download_file_name=session['download_file_name'] + ".csv")
+    if selected_method == "GANs":
+        gans(data_path, file_name, "downloads", "models", "model_results", cat_columns=cat_columns,
+             batch_size=batch_size, epochs=epochs, noise_dim=noise_dim, output_size=output_size)
+
+    display = """<div id="nn_result">"""
+
+    for file in os.listdir("model_results/" + file_name):
+        display = display + "<img src='" + "model_results/" + file_name + "/" + file + "' />"
+
+    display = display + "</div>"
+
+    return render_template('result.html', function="Neural Network", selected_method=selected_method,
+                           display=display,
+                           download_file_name=session['download_file_name'] + ".csv")
 
 
 @app.route('/get_pseu_result', methods=["POST"])
@@ -177,9 +166,8 @@ def get_pseu_result():
     selected_method = request.values.getlist("pseu_method")[0]
     selected_columns = request.values.getlist("pseu_column")
     result = pseudonymization(selected_method, data_path, selected_columns)
-    random_name = random_filename(file_name)
-    result.to_csv(os.path.join(app.config['DOWNLOAD_PATH'], random_name) + ".csv", index=0)
-    session['download_file_name'] = [random_name][0]
+    result.to_csv(os.path.join(app.config['DOWNLOAD_PATH'], file_name) + ".csv", index=0)
+    session['download_file_name'] = file_name
 
     display = """<table id="pseu_result"><tr>"""
     for column in selected_columns:

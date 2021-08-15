@@ -4379,3 +4379,73 @@
 		  margin-left: 28px;
 
   }
+
+
+
+  .parameter_selection{
+	  margin-top: 40px;
+	  margin-bottom: 80px;
+  }
+
+  .parameter_selection > h1{
+	  font-weight: bold;
+	  font-family: "Microsoft YaHei UI";
+	  font-size: 20px;
+	  color: #595959;
+  }
+
+    .parameter_selection > ul >li > label{
+	  float: left;
+		width: fit-content;
+
+  }
+
+	.parameter_selection > ul >li > label > input[type=checkbox]{
+	  float: left;
+		margin-top: 8px;
+
+
+
+  }
+	.parameter_selection > label > select{
+	  float: left;
+	  height: 40px;
+  }
+
+
+	  .parameter_selection > ul >li > label > span{
+	  width: fit-content;
+		float: right;
+		  font-size: 20px;
+		  font-weight: normal;
+		  font-family: "Microsoft YaHei UI";
+		  display: block;
+		  margin-left: 28px;
+
+  }
+
+#nn_result > img{
+	width: 100%;
+	align-self: center;
+}
+
+#disable_elements{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    display: None;
+    filter:alpha(opacity=60);
+    background-color: #777;
+    opacity: 0.9;
+    -moz-opacity: 0.9;
+	height: 100%;
+	width: 100%;
+	font-weight: bold;
+	font-family: "Microsoft YaHei UI";
+	font-size: 50px;
+	text-align: center;
+	line-height: 3938pt;
+	color: black;
+	vertical-align: center;
+}
